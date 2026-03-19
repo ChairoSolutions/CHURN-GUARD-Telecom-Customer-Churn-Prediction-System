@@ -1,205 +1,126 @@
-# CHURN-GUARD-Telecom-Customer-Churn-Prediction-System
+# 📊 SyriaTel Customer Churn Prediction
 
-##  Project Overview
-In this project, I built a machine learning model to predict **customer churn** for a telecom company. The goal was to identify customers who are likely to leave the service so that the business can take proactive retention actions.
+## Setup section
+pip install -r requirements.txt
 
-Customer churn is a critical problem because retaining existing customers is often more cost-effective than acquiring new ones. This project focuses not just on model accuracy, but on building a solution that is **practically useful for business decision-making**.
-
----
-
-##  Objectives
-- Identify key factors that drive customer churn  
-- Build predictive models to classify churn vs non-churn customers  
-- Improve model performance using:
-  - Threshold tuning  
-  - Class imbalance handling  
-- Compare multiple models and select the best one  
-- Generate actionable business insights  
+## 🧠 Project Overview
+Customer churn is a critical problem for telecom companies, as losing customers directly impacts revenue. This project aims to build a machine learning model to predict customer churn and identify key drivers behind customer attrition.
 
 ---
 
-##  Dataset
-The dataset contains customer information such as:
+## 🎯 Business Understanding
+The objective of this project is to help SyriaTel reduce customer churn by:
 
-- Account details (account length, area code)
-- Usage behavior (day, evening, night minutes)
-- Service features (international plan, voicemail)
-- Customer service interactions
-- Target variable: **Churn (True/False)**
+- Identifying customers likely to leave
+- Understanding the factors driving churn
+- Providing actionable recommendations for retention
 
 ---
 
-##  Exploratory Data Analysis (EDA)
+## 📂 Data Understanding
 
-Key findings from the analysis:
+The dataset contains 3,333 customer records with 21 features, including:
 
-- Customers with **international plans churn more**
-- High number of **customer service calls** is strongly associated with churn
-- Higher **daytime usage** shows a positive relationship with churn
-- Overall, churn is influenced more by **customer experience and behavior** than static attributes
+- Customer demographics (state, account length)
+- Service usage (day, evening, night minutes)
+- Account features (international plan, voicemail plan)
+- Customer interactions (customer service calls)
 
----
-
-##  Data Preprocessing
-
-Steps performed:
-
-- Removed irrelevant features (e.g., phone number as an identifier)
-- Encoded categorical variables (one-hot encoding where appropriate)
-- Checked for multicollinearity
-- Split data into training and testing sets:
-  - Training samples: 2666  
-  - Testing samples: 667  
+### 🎯 Target Variable:
+- `churn` (True = customer left, False = customer stayed)
 
 ---
 
-##  Models Built
+## 🧹 Data Preparation
 
-I trained and evaluated the following models:
+Key preprocessing steps included:
 
-- Logistic Regression (baseline)
-- Random Forest
-- Gradient Boosting
-
----
-
-##  Initial Model Performance
-
-The baseline Logistic Regression model achieved:
-
-- Accuracy: 86%  
-- Recall (churn): 24%  
-
-Although accuracy was high, the model **missed most churners**, making it unsuitable for real-world use.
+- Dropping the `phone number` column (identifier, not predictive)
+- Encoding categorical variables using one-hot encoding
+- Splitting data into training (80%) and testing (20%) sets
+- Handling class imbalance using `class_weight='balanced'`
 
 ---
 
-##  Model Improvements
+## 📊 Exploratory Data Analysis (EDA)
 
-### 1. Threshold Tuning
+Key insights:
 
-Instead of using the default 0.5 threshold, I tested lower thresholds:
-
-| Threshold | Precision | Recall | F1 |
-|---|---|---|---|
-| 0.5 | 0.56 | 0.26 | 0.35 |
-| 0.4 | 0.50 | 0.36 | 0.42 |
-| 0.3 | 0.44 | 0.47 | 0.46 |
-| 0.2 | 0.37 | 0.61 | 0.46 |
-
- **Insight:**
-- Lowering the threshold significantly improves recall
-- Best balance achieved around **0.2–0.3**
+- Customers with **more customer service calls** are more likely to churn
+- Customers with an **international plan** have higher churn rates
+- Higher **daytime usage** is associated with increased churn
 
 ---
 
-### 2. Handling Class Imbalance
+## ⚙️ Modeling Approach
 
-Applied:
+Three models were trained:
 
-```python
-class_weight='balanced'
-Result: 
-- Recall improved from 24% to 70%
-- Model became much better at detecting churners
+- Logistic Regression (with pipeline and scaling)
+- Random Forest Classifier
+- Gradient Boosting Classifier
 
-## Model Benchmarking Results
-
-| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
-|------|------|------|------|------|------|
-| Logistic Regression | 0.74 | 0.32 | 0.70 | 0.44 | 0.80 |
-| Random Forest | 0.92 | 0.89 | 0.53 | 0.66 | 0.89 |
-| Gradient Boosting | 0.96 | 0.95 | 0.77 | 0.85 | 0.89 |
-
- **Best Model: Gradient Boosting**
-
-Gradient Boosting outperformed all other models:
-
-- Highest accuracy (96%)
-- Highest recall (77%)
-- Highest precision (95%)
-- Best F1 score (0.85)
-
- **Why it matters:**
-
-- Captures most churners
-- Minimizes false positives
-- Provides the best balance for business use
+A pipeline was used for Logistic Regression to ensure proper feature scaling and prevent data leakage.
 
 ---
 
-##  Feature Importance
+## 📏 Model Evaluation
 
-The most important features influencing churn:
+Models were evaluated using:
 
-- Customer service calls
-- Total day minutes
-- International plan
-- Total international minutes
-- Voicemail usage
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- ROC-AUC
 
----
-
-##  Business Insights
-
-### 1. Customer Support is a Major Churn Driver
-
-Customers who frequently contact support are more likely to churn.
-
- **Action:**
-
-- Improve customer service experience
-- Prioritize customers with repeated complaints
-
-### 2. High Usage Customers Are At Risk
-
-Heavy users tend to churn more, possibly due to pricing sensitivity.
-
- **Action:**
-
-- Offer personalized plans
-- Provide loyalty incentives
-
-### 3. International Plan Customers Have Higher Churn
-
-These customers may face higher costs or unmet expectations.
-
- **Action:**
-
-- Re-evaluate pricing
-- Introduce better international bundles
+A reusable evaluation function was implemented to ensure consistency across models.
 
 ---
 
-##  Final Conclusion
+## 🏆 Results
 
-Initially, the model showed high accuracy but failed to identify churners due to class imbalance and default threshold settings. By applying threshold tuning and class weighting, I significantly improved the model’s ability to detect churn.
+| Model                 | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+|----------------------|----------|----------|--------|----------|---------|
+| Logistic Regression  | 0.74     | 0.32     | 0.70   | 0.44     | 0.80    |
+| Random Forest        | 0.92     | 0.89     | 0.53   | 0.66     | 0.89    |
+| Gradient Boosting    | 0.96     | 0.95     | 0.77   | 0.85     | 0.89    |
 
-After benchmarking multiple models, Gradient Boosting emerged as the best-performing model, offering the optimal balance between precision and recall.
-
-This model can help businesses proactively identify at-risk customers and implement targeted retention strategies, ultimately reducing churn and improving customer lifetime value.
-
----
-
-##  Future Improvements
-
-- Apply SHAP for model explainability
-- Perform hyperparameter tuning
-- Deploy model using Flask or Streamlit
-- Conduct ROI analysis for retention strategies
+### ✅ Final Model:
+Gradient Boosting was selected due to its strong balance between precision and recall.
 
 ---
 
-##  Tools & Technologies
+## 💡 Business Recommendations
 
-- Python
-- Pandas
-- NumPy
+- Focus on customers with **high customer service calls**
+- Improve service experience to reduce dissatisfaction
+- Target **international plan users** with retention offers
+- Monitor high-usage customers for potential churn risk
+
+---
+
+## 🚀 Next Steps
+
+- Deploy the model as an API for real-time predictions
+- Build a dashboard for business stakeholders
+- Perform hyperparameter tuning for further optimization
+- Incorporate additional customer behavior data
+
+---
+
+## 🛠️ Tools & Technologies
+
+- Python (Pandas, NumPy)
 - Scikit-learn
-- Matplotlib
+- Matplotlib & Seaborn
+- Jupyter Notebook
 
 ---
 
-##  Author
+## 👤 Author
 
-Brian Chairo
+**Brian Chairo**  
+Aspiring Data Scientist
+
+---
