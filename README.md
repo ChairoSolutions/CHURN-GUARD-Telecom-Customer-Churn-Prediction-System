@@ -1,14 +1,14 @@
-# 📊 SyriaTel Customer Churn Prediction
+#  SyriaTel Customer Churn Prediction
 
 ## Setup section
 pip install -r requirements.txt
 
-## 🧠 Project Overview
+##  Project Overview
 Customer churn is a critical problem for telecom companies, as losing customers directly impacts revenue. This project aims to build a machine learning model to predict customer churn and identify key drivers behind customer attrition.
 
 ---
 
-## 🎯 Business Understanding
+##  Business Understanding
 The objective of this project is to help SyriaTel reduce customer churn by:
 
 - Identifying customers likely to leave
@@ -17,7 +17,7 @@ The objective of this project is to help SyriaTel reduce customer churn by:
 
 ---
 
-## 📂 Data Understanding
+##  Data Understanding
 
 The dataset contains 3,333 customer records with 21 features, including:
 
@@ -26,12 +26,12 @@ The dataset contains 3,333 customer records with 21 features, including:
 - Account features (international plan, voicemail plan)
 - Customer interactions (customer service calls)
 
-### 🎯 Target Variable:
+###  Target Variable:
 - `churn` (True = customer left, False = customer stayed)
 
 ---
 
-## 🧹 Data Preparation
+##  Data Preparation
 
 Key preprocessing steps included:
 
@@ -42,7 +42,7 @@ Key preprocessing steps included:
 
 ---
 
-## 📊 Exploratory Data Analysis (EDA)
+##  Exploratory Data Analysis (EDA)
 
 Key insights:
 
@@ -52,7 +52,7 @@ Key insights:
 
 ---
 
-## ⚙️ Modeling Approach
+##  Modeling Approach
 
 Three models were trained:
 
@@ -64,7 +64,7 @@ A pipeline was used for Logistic Regression to ensure proper feature scaling and
 
 ---
 
-## 📏 Model Evaluation
+## Model Evaluation
 
 Models were evaluated using:
 
@@ -78,7 +78,7 @@ A reusable evaluation function was implemented to ensure consistency across mode
 
 ---
 
-## 🏆 Results
+##  Results
 
 | Model                 | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
 |----------------------|----------|----------|--------|----------|---------|
@@ -86,12 +86,12 @@ A reusable evaluation function was implemented to ensure consistency across mode
 | Random Forest        | 0.92     | 0.89     | 0.53   | 0.66     | 0.89    |
 | Gradient Boosting    | 0.96     | 0.95     | 0.77   | 0.85     | 0.89    |
 
-### ✅ Final Model:
+###  Final Model:
 Gradient Boosting was selected due to its strong balance between precision and recall.
 
 ---
 
-## 💡 Business Recommendations
+##  Business Recommendations
 
 - Focus on customers with **high customer service calls**
 - Improve service experience to reduce dissatisfaction
@@ -100,7 +100,7 @@ Gradient Boosting was selected due to its strong balance between precision and r
 
 ---
 
-## 🚀 Next Steps
+##  Next Steps
 
 - Deploy the model as an API for real-time predictions
 - Build a dashboard for business stakeholders
@@ -109,7 +109,7 @@ Gradient Boosting was selected due to its strong balance between precision and r
 
 ---
 
-## 🛠️ Tools & Technologies
+##  Tools & Technologies
 
 - Python (Pandas, NumPy)
 - Scikit-learn
@@ -118,7 +118,7 @@ Gradient Boosting was selected due to its strong balance between precision and r
 
 ---
 
-## 👤 Author
+##  Author
 
 **Brian Chairo**  
 Aspiring Data Scientist
